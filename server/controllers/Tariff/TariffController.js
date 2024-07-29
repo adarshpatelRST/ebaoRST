@@ -1,11 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const Tariff = require('../models/Tariff/Tariff');
+const Tariff = require('../../models/Tariff/Tariff');
 
 // @route   POST /api/tariffs
 // @desc    Create a new tariff
 // @access  Public
-router.post('/', async (req, res) => {
+exports.createTariff = async (req, res) => {
   const { TariffName, TariffOwnerId, ChannelCode, AgreementCode, AccountNumber, CreatedBy } = req.body;
 
   try {
@@ -19,36 +17,36 @@ router.post('/', async (req, res) => {
     });
 
     const tariff = await newTariff.save();
-    res.json(tariff);
+    res.status(201).json(tariff);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
-});
+};
 
 // @route   GET /api/tariffs
 // @desc    Get all tariffs
 // @access  Public
-router.get('/', async (req, res) => {
+exports.getAllTariffs = async (req, res) => {
   try {
     const tariffs = await Tariff.find().populate('TariffOwnerId CreatedBy UpdatedBy');
-    res.json(tariffs);
+    res.status(200).json(tariffs);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
-});
+};
 
 // @route   GET /api/tariffs/:id
 // @desc    Get a tariff by ID
 // @access  Public
-router.get('/:id', async (req, res) => {
+exports.getTariffById = async (req, res) => {
   try {
     const tariff = await Tariff.findById(req.params.id).populate('TariffOwnerId CreatedBy UpdatedBy');
     if (!tariff) {
       return res.status(404).json({ msg: 'Tariff not found' });
     }
-    res.json(tariff);
+    res.status(200).json(tariff);
   } catch (err) {
     console.error(err.message);
     if (err.kind === 'ObjectId') {
@@ -56,12 +54,12 @@ router.get('/:id', async (req, res) => {
     }
     res.status(500).send('Server Error');
   }
-});
+};
 
 // @route   PUT /api/tariffs/:id
 // @desc    Update a tariff
 // @access  Public
-router.put('/:id', async (req, res) => {
+exports.updateTariffById = async (req, res) => {
   const { TariffName, TariffOwnerId, ChannelCode, AgreementCode, AccountNumber, UpdatedBy, IsActive } = req.body;
 
   const updatedFields = {
@@ -88,7 +86,7 @@ router.put('/:id', async (req, res) => {
       { new: true }
     );
 
-    res.json(tariff);
+    res.status(200).json(tariff);
   } catch (err) {
     console.error(err.message);
     if (err.kind === 'ObjectId') {
@@ -96,20 +94,20 @@ router.put('/:id', async (req, res) => {
     }
     res.status(500).send('Server Error');
   }
-});
+};
 
 // @route   DELETE /api/tariffs/:id
 // @desc    Delete a tariff
 // @access  Public
-router.delete('/:id', async (req, res) => {
+exports.deleteTariffById = async (req, res) => {
   try {
     const tariff = await Tariff.findByIdAndDelete(req.params.id);
 
     if (!tariff) {
       return res.status(404).json({ msg: 'Tariff not found' });
     }
-
-    res.json({ msg: 'Tariff removed' });
+    
+    res.status(200).json({ msg: 'Tariff removed' });
   } catch (err) {
     console.error(err.message);
     if (err.kind === 'ObjectId') {
@@ -117,6 +115,4 @@ router.delete('/:id', async (req, res) => {
     }
     res.status(500).send('Server Error');
   }
-});
-
-module.exports = router;
+};

@@ -16,57 +16,17 @@
 
 const mongoose = require('mongoose');
 
-const tariffSchema = new mongoose.Schema({
-  TariffName: {
-    type: String,
-    required: true
-  },
-  TariffOwnerId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  ChannelCode: {
-    type: String,
-    required: true
-  },
-  AgreementCode: {
-    type: String,
-    required: true
-  },
-  AccountNumber: {
-    type: String,
-    required: true
-  },
-  CreatedBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  CreatedOn: {
-    type: Date,
-    default: Date.now,
-    required: true
-  },
-  UpdatedBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  UpdatedOn: {
-    type: Date
-  },
-  IsActive: {
-    type: Boolean,
-    default: true
-  }
+const TariffSchema = new mongoose.Schema({
+  TariffName: { type: String, required: true },
+  TariffOwnerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  ChannelCode: { type: String, required: true },
+  AgreementCode: { type: String, required: true },
+  AccountNumber: { type: String, required: true },
+  CreatedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  CreatedOn: { type: Date, default: Date.now },
+  UpdatedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  UpdatedOn: { type: Date },
+  IsActive: { type: Boolean, default: true }
 });
 
-// Middleware to set UpdatedOn before saving
-tariffSchema.pre('save', function (next) {
-  this.UpdatedOn = new Date();
-  next();
-});
-
-const Tariff = mongoose.model('Tariff', tariffSchema);
-
-module.exports = Tariff;
+module.exports = mongoose.model('Tariff', TariffSchema);

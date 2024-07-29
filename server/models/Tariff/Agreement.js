@@ -11,52 +11,17 @@
   "IsActive": true
 }
 */
-
 const mongoose = require('mongoose');
 
-const agreementSchema = new mongoose.Schema({
-  AgreementName: {
-    type: String,
-    required: true
-  },
-  AgreementCode: {
-    type: String,
-    required: true
-  },
-  AgreementCategory: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'AgreementCategory',
-    required: true
-  },
-  CreatedBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  CreatedOn: {
-    type: Date,
-    default: Date.now,
-    required: true
-  },
-  UpdatedBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  UpdatedOn: {
-    type: Date
-  },
-  IsActive: {
-    type: Boolean,
-    default: true
-  }
+const AgreementSchema = new mongoose.Schema({
+  AgreementName: { type: String, required: true },
+  AgreementCode: { type: String, required: true },
+  AgreementCategory: { type: mongoose.Schema.Types.ObjectId, ref: 'AgreementCategory', required: true },
+  CreatedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  CreatedOn: { type: Date, default: Date.now },
+  UpdatedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  UpdatedOn: { type: Date },
+  IsActive: { type: Boolean, default: true }
 });
 
-// Middleware to set UpdatedOn before saving
-agreementSchema.pre('save', function (next) {
-  this.UpdatedOn = new Date();
-  next();
-});
-
-const Agreement = mongoose.model('Agreement', agreementSchema);
-
-module.exports = Agreement;
+module.exports = mongoose.model('Agreement', AgreementSchema);
