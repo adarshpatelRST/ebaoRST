@@ -49,15 +49,20 @@ const policyCoverageRoutes = require('./routes/Policy/policyCoverageRoutes');
 const coveredCountryRoutes = require('./routes/Policy/coveredCountryRoutes');
 
 app.use('/api/policies', policyRoutes);
-app.use('/api/policyholders', policyHolderRoutes);
-app.use('/api/policyrisks', policyRiskRoutes);
-app.use('/api/policyholderprimaryaccounts', policyHolderPrimaryAccountRoutes);
-app.use('/api/policyholderprimaryaddresses', policyHolderPrimaryAddressRoutes);
-app.use('/api/contacts', policyHolderPrimaryContactRoutes);
-app.use('/api/policy-lines', policyLineRoutes);
-app.use('/api/policy-plans', policyPlanRoutes);
-app.use('/api/policy-coverages', policyCoverageRoutes);
-app.use('/api/covered-countries', coveredCountryRoutes);
+app.use('/api/policyHolders', policyHolderRoutes);
+app.use('/api/policyRisks', policyRiskRoutes);
+app.use('/api/policyHolderPrimaryAccounts', policyHolderPrimaryAccountRoutes);
+app.use('/api/policyHolderPrimaryAddresses', policyHolderPrimaryAddressRoutes);
+app.use('/api/policyHolderPrimaryContacts', policyHolderPrimaryContactRoutes);
+app.use('/api/policyLines', policyLineRoutes);
+app.use('/api/policyPlans', policyPlanRoutes);
+app.use('/api/policyCoverages', policyCoverageRoutes);
+app.use('/api/coveredCountries', coveredCountryRoutes);
+
+
+// Expose Auto Lease API's
+const autoLeaseRoutes = require('./routes/autoLeaseRoutes');
+app.use('/api/autoLease', autoLeaseRoutes);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
