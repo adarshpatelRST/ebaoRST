@@ -1,4 +1,4 @@
-const PolicyHolderPrimaryAddress = require('../../models/Policy/PolicyHolderPrimaryAddress');
+const PolicyHolderPrimaryAddress = require('../../models/Policy/policyHolderPrimaryAddress');
 
 // Get all policy holder primary addresses
 exports.getAllPolicyHolderPrimaryAddresses = async (req, res) => {

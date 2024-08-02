@@ -1,4 +1,4 @@
-const PolicyHolderPrimaryAccount = require('../../models/Policy/PolicyHolderPrimaryAccount');
+const PolicyHolderPrimaryAccount = require('../../models/Policy/policyHolderPrimaryAccount');
 
 // Get all policy holder primary accounts
 exports.getAllPolicyHolderPrimaryAccounts = async (req, res) => {

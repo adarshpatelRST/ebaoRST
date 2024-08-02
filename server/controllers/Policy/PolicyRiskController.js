@@ -1,4 +1,4 @@
-const PolicyRisk = require('../../models/Policy/PolicyRisk');
+const PolicyRisk = require('../../models/Policy/policyRisk');
 
 // Get all policy risks
 exports.getAllPolicyRisks = async (req, res) => {

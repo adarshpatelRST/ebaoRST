@@ -1,4 +1,4 @@
-const PolicyPlan = require('../../models/Policy/PolicyPlan');
+const PolicyPlan = require('../../models/Policy/policyPlan');
 
 // Get all policy plans
 exports.getAllPlans = async (req, res) => {

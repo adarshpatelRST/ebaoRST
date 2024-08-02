@@ -1,4 +1,4 @@
-const PolicyHolderPrimaryContact = require('../../models/Policy/PolicyHolderPrimaryContact');
+const PolicyHolderPrimaryContact = require('../../models/Policy/policyHolderPrimaryContact');
 
 // Get all policy holder primary contacts
 exports.getAllContacts = async (req, res) => {
